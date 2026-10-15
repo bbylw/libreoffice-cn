@@ -1,89 +1,138 @@
-# LibreOffice 中文站
+# LibreOffice
+[![Coverity 扫描构建状态](https://scan.coverity.com/projects/211/badge.svg)](https://scan.coverity.com/projects/211) [![OpenSSF 最佳实践](https://www.bestpractices.dev/projects/307/badge)](https://www.bestpractices.dev/projects/307) [![翻译状态](https://weblate.documentfoundation.org/widgets/libo_ui-master/-/svg-badge.svg)](https://weblate.documentfoundation.org/engage/libo_ui-master/?utm_source=widget)
 
-一个以 **TanStack Start + Bun** 构建的中文内容站，介绍 LibreOffice：官方下载入口、六款应用、代码结构速览与社区参与方式。
+<img align="right" width="150" src="https://opensource.org/wp-content/uploads/2009/06/OSIApproved.svg">
 
-内容依据 [libreoffice.org](https://www.libreoffice.org/)、[简体中文官网](https://zh-cn.libreoffice.org/) 与
-[LibreOffice/core README](https://github.com/LibreOffice/core) 整理。
+LibreOffice 是一套基于 copyleft（著佐权）许可证的集成办公套件，
+兼容绝大多数文档格式与标准。LibreOffice 由
+The Document Foundation（文档基金会）背书，该基金会代表着一个庞大的
+独立社区，由企业、开发者及其他志愿者组成，大家怀着共同的目标——
+把最好的个人生产力软件推向市场。LibreOffice 是开源软件，可自由地
+下载、使用与分发。
 
-## 下载策略：站内不写死任何版本号
+LibreOffice 代码结构速览。
 
-LibreOffice 按固定节奏发布新版本，任何写死的 `26.x.y` 地址都会过期，也可能让读者装到过时版本。
-因此全站没有一处版本号或版本化的安装包地址，所有下载入口都是与版本无关的官方页面，由官方页面给出当前稳定版：
+## 概述
 
-| 入口 | 地址 |
-| --- | --- |
-| 繁体中文官网下载页（站内主按钮目标） | https://zh-tw.libreoffice.org/下載/ |
-| 简体中文官网下载页 | https://zh-cn.libreoffice.org/download/libreoffice/ |
-| 国际版下载页 | https://www.libreoffice.org/download/ |
-| 国内镜像（腾讯云） | https://mirrors.cloud.tencent.com/libreoffice/libreoffice/stable/ |
-| 旧版本归档 | https://downloadarchive.documentfoundation.org/libreoffice/old/ |
+你可以通过两种方式之一来为 LibreOffice 做开发，其中一种被推荐，
+另一种则不太推荐。先说那个相对不太推荐的方式：你可以使用 SDK 来
+开发一个扩展（extension），为此你可以阅读
+[API 文档](https://api.libreoffice.org/)以及
+[开发者指南](https://wiki.documentfoundation.org/Documentation/DevGuide)。
+它会复用（极其通用的）UNO API，这些 API 同样被 StarBasic 中的宏脚本所使用。
 
-站内的「最近几个版本带来了什么」只列代表性变化，并把完整清单交给官方发行注记页面。
+不过，向 LibreOffice 添加一个普遍有用的功能，最佳方式还是直接
+在代码库上工作。总体而言，这种方式让你更容易编译与构建自己的代码，
+它避开了我们脚本 API 中种种任意的限制，而且一般来说要简单直观得多——
+前提是你是一名还算胜任的 C++ 程序员。
 
-## 技术栈
+## 构建链与运行时基线
 
-| 关注点 | 选型 | 版本 |
-| --- | --- | --- |
-| 框架 | TanStack Start（全栈 React，文件式路由 + SSR） | 1.169.2 |
-| 路由 | TanStack Router（代码分割、预加载、滚动恢复） | 1.170.44 |
-| 打包 | Vite + Rolldown + nitro 预设 | 8.3.4 |
-| 样式 | Tailwind CSS v4（`@theme inline` CSS 变量主题） | 4.3.3 |
-| 动效 | Motion（Framer Motion 的继任者） | 14.2.0 |
-| 图标 | Phosphor Icons | 2.1.10 |
-| 字体 | 自托管 Fontsource 变量字体（Outfit / Noto Sans SC / JetBrains Mono） | 5.3.x |
-| 运行时与包管理 | Bun | 1.4.3 |
+C++ 基线为 C++23。可用特性受最低编译器版本所约束。
 
-## 运行
+以下是当前运行与编译 LibreOffice 所需的最低操作系统与编译器版本，
+TDF（文档基金会）的构建也采用这些版本：
 
-```bash
-bun install
-bun dev        # http://127.0.0.1:5178
-bun run build  # 产出 .output/，并跑一次 tsc --noEmit
-bun start      # 以 bun 运行生产构建的 nitro 服务
-```
+* Windows：
+    * 运行时：Windows 10
+    * 构建：[wsl-as-helper](https://wiki.documentfoundation.org/Development/BuildingOnWSLWindows) + Visual Studio 2022
+* macOS：
+    * 运行时：11
+    * 构建：macOS 14 配合 Xcode 16.2 或更高版本（使用给定 macOS 版本下可用的 Xcode 最新版本）
+* Linux：
+    * 运行时：RHEL 9 或 CentOS 9 及相当的系统
+    * 构建：GCC 13；或 Clang 18 配合 libstdc++ 11
+* iOS（仅适用于 LibreOfficeKit）：
+    * 运行时：14.5（仅支持较新的 i 设备 == 64 位）
+    * 构建：Xcode 12.5 与 iPhone SDK 14.5
+* Android：
+    * 构建：NDK 27 与 SDK 30.0.3
+* Emscripten / WASM：
+    * 运行时：支持 SharedMemory（线程 + 原子操作）的浏览器
+    * 构建：Qt 5.15 配合 Qt 所支持的 Emscripten 1.39.8
+    * 详见 [README.wasm](https://github.com/LibreOffice/core/blob/master/static/README.wasm.md)
 
-`vite.config.ts` 里显式绑定了 `127.0.0.1:5178`（本机 3000 端口被占用）。改端口直接编辑该文件即可。
-生产服务端口通过环境变量覆盖：`$env:PORT="5180"; bun start`。
+构建 LibreOffice 的许多部分都需要 Java。在 TDF Wiki 文章
+[Development/Java](https://wiki.documentfoundation.org/Development/Java) 中，
+列出了确切依赖 Java 的模块。
 
-## 路由
+Java 的基线是 JDK（Java Development Kit）17 或更高版本。
 
-| 路径 | 说明 |
-| --- | --- |
-| `/` | 首页：首屏、六款应用、选择理由、近期新功能、下载说明、代码结构、社区与评价 |
-| `/download` | 官方下载入口、国内镜像、其他安装格式、版本与语言包说明、系统要求 |
-| `/develop` | 两条开发路径、关键模块、`#include` 规则、求助渠道 |
-| `/community` | 入门面谈、七个贡献方向、社区活动、官方账号 |
-| 未匹配 | 中文 404 页 |
+Python 的基线是 3.11 版本。它跟随 SUSE Linux Enterprise Desktop 以及
+Red Hat Enterprise Linux 维护支持版本中可用的版本。
 
-## 目录
+如果你想把 Clang 配合 LibreOffice 的编译器插件使用，Clang 的最低版本
+为 18。由于 Xcode 不提供编译器插件的头文件，你必须在 macOS 上自行
+编译 Clang 才能使用这些插件。
 
-```
-src/
-  components/      页头、页脚、品牌标志、主题切换、入场动效、404 与错误边界
-  data/            纯数据：下载入口、六款应用、模块说明、系统要求、社区信息
-  routes/          文件式路由，每个路由自带 head()（标题、描述、OG）
-  styles/app.css   设计令牌（颜色、字体、圆角）、深浅主题、基础样式
-  router.tsx       路由器装配
-public/media/      站点使用的真实素材（应用截图、插图、社区照片、社交图标）
-```
+你可以在 `distro-configs/` 目录中找到 TDF 的配置开关。
 
-## 设计约定
+要在 Windows 与 macOS 上搭建初始构建环境，我们提供了
+LibreOffice 开发环境
+（[LODE](https://wiki.documentfoundation.org/Development/lode)）脚本。
 
-- **单一强调色**：取自品牌绿 `#18a303`。图形用原色，文字链接用 `--brand-ink`（浅色 `#0e6a02`、深色 `#58c81f`，对比度满足 WCAG AA），按钮底统一用 `--brand-bg`。
-- **形状系统**：卡片 16px、控件 10px，仅版本徽标使用胶囊形。
-- **深浅主题**：`<html data-theme>` 驱动，内联脚本在首帧前决定主题，避免闪烁；切换结果写入 localStorage。
-- **动效**：只动 `transform` 与 `opacity`，全部通过 `useReducedMotion()` 尊重 `prefers-reduced-motion`。
-- **文案**：全站零破折号；中文标点统一使用全角。
+欲了解更多信息，请参阅
+[TDF wiki](https://wiki.documentfoundation.org/Development/How_to_build) 中
+针对你所用平台的构建说明。
 
-## 数据来源
+## 代码中的关键部分
 
-- 下载入口全部为与版本无关的官方页面（简体中文官网、繁体中文官网、国际版、腾讯云镜像、旧版本归档），已逐个校验返回 200。
-- 系统要求取自 LibreOffice/core README 的「构建链与运行时基线」，与具体发行版无关。
-- 模块说明取自同一份 README 的「代码中的关键部分」。
-- 截图与插图来自 libreoffice.org 官方媒体目录（CC BY-SA 3.0）。
+每个模块内部都应有一个 `README.md` 文件，对该模块有一定程度的
+文档说明；我们非常欢迎提交补丁来改进这些文档。我们已将它们整理成
+一个网页：
 
-## 许可
+<https://docs.libreoffice.org/>
 
-本站为中文整理站点，非 LibreOffice 官方站点。内容采用知识共享 署名相同方式共享 3.0
-许可；LibreOffice 源代码以 Mozilla 公共许可证 2.0 授权。「LibreOffice」与「The Document
-Foundation」是其各自所有者的注册商标。
+不过，这里有两百个模块，其中许多只对特定领域的专家受众才有
+边缘性的意义。那么——好东西在哪里，最有用的代码是什么。下面快速
+概述其中最重要的部分：
+
+模块    | 说明
+----------|-------------------------------------------------
+[sal/](https://github.com/LibreOffice/core/tree/master/sal)             | 提供一个简单的系统抽象层（System Abstraction Layer）
+[tools/](https://github.com/LibreOffice/core/tree/master/tools)         | 提供基础内部类型：`Rectangle`、`Color` 等。
+[vcl/](https://github.com/LibreOffice/core/tree/master/vcl)             | 这是部件工具包（widget toolkit）库以及一种渲染抽象层
+[framework/](https://github.com/LibreOffice/core/tree/master/framework) | UNO 框架，负责构建工具栏、菜单、状态栏，以及文档周围的"外壳"（chrome），使用来自 VCL 的部件以及来自 `/uiconfig/` 文件的 XML 描述
+[sfx2/](https://github.com/LibreOffice/core/tree/master/sfx2)           | Writer/Calc/Draw 所用的遗留核心框架：文档模型 / 载入与保存 / 动作信号等
+[svx/](https://github.com/LibreOffice/core/tree/master/svx)             | 绘图模型相关的辅助代码，包含 Draw/Impress 的大部分内容
+
+然后是各应用程序
+
+模块    | 说明
+----------|-------------------------------------------------
+[desktop/](https://github.com/LibreOffice/core/tree/master/desktop)  | 应用程序的 `main()` 所在之处，负责初始化 / 引导启动。其名称可追溯到一款同样绘制桌面的古老 StarOffice
+[sw/](https://github.com/LibreOffice/core/tree/master/sw)           | Writer（文字处理）
+[sc/](https://github.com/LibreOffice/core/tree/master/sc)           | Calc（电子表格）
+[sd/](https://github.com/LibreOffice/core/tree/master/sd)           | Draw / Impress（绘图 / 演示）
+
+此外还有几个从图形角度很有帮助的库：
+
+模块    | 说明
+----------|-------------------------------------------------
+[basegfx/](https://github.com/LibreOffice/core/tree/master/basegfx)  | 画布中所用图形的算法与数据类型
+[canvas/](https://github.com/LibreOffice/core/tree/master/canvas)   | 全新的（UNO）画布渲染模型，带有多种后端
+[cppcanvas/](https://github.com/LibreOffice/core/tree/master/cppcanvas) | 使用 UNO 画布的 C++ 辅助类
+[drawinglayer/](https://github.com/LibreOffice/core/tree/master/drawinglayer) | 用于渲染可绘制对象、并将其拆解为更易渲染的基本图元（primitives）的视图代码。
+
+## #include 指令规则（C/C++）
+
+仅当被包含文件与包含它的文件相邻时，才使用 `"..."` 形式。
+否则，使用 `<...>` 形式。（更多细节，请参阅邮件
+[Re: C[++]: Normalizing include syntax ("" vs
+<>)](https://lists.freedesktop.org/archives/libreoffice/2017-November/078778.html)。）
+
+UNO API 的包含文件应当一致地使用双引号，以惠及该 API 的外部使用者。
+
+`loplugin:includeform (compilerplugins/clang/includeform.cxx)` 会强制执行这些规则。
+
+## 了解更多
+
+除此之外，你可以阅读那些 `README.md` 文件、向我们提交补丁、在邮件列表
+libreoffice@lists.freedesktop.org 上提问（无需订阅），或者在 IRC 的
+`#libreoffice-dev`（位于 irc.libera.chat）频道上找人交流——
+我们是一群友好且通常乐于助人的家伙。我们知道代码一开始可能难以入手，
+因此这里不存在什么愚蠢的问题。
+
+## SAST 工具
+
+[PVS-Studio](https://pvs-studio.com/en/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) —— 面向 C、C++、C# 与 Java 代码的静态分析器。
