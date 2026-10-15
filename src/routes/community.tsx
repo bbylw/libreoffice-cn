@@ -52,7 +52,7 @@ function CommunityPage() {
             <p className="eyebrow">参与方式</p>
           </Reveal>
           <Reveal mode="mount" delay={0.06}>
-            <h1 className="mt-4 max-w-[16ch] text-4xl font-semibold leading-[1.15] tracking-tight text-ink md:text-5xl">
+            <h1 className="mt-4 max-w-[16ch] text-balance text-4xl font-semibold leading-[1.15] tracking-tight text-ink md:text-5xl">
               欢迎加入 LibreOffice
             </h1>
           </Reveal>

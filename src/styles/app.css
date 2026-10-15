@@ -28,6 +28,7 @@
   --color-brand-bg: var(--brand-bg);
   --color-brand-fg: var(--brand-fg);
   --color-brand-soft: var(--brand-soft);
+  --color-brand-ink: var(--brand-ink);
 
   --radius-card: 16px;
   --radius-control: 10px;
@@ -46,6 +47,7 @@
   --ink-3: #5b6568;
   /* 品牌绿: 图形与标志用原色, 文字与按钮用加深版本以满足 WCAG AA */
   --brand: #18a303;
+  --brand-ink: #0e6a02;
   --brand-bg: #0e6a02;
   --brand-fg: #ffffff;
   --brand-soft: rgb(24 163 3 / 0.1);
@@ -61,6 +63,7 @@
   --ink-2: #c4cdce;
   --ink-3: #98a3a5;
   --brand: #58c81f;
+  --brand-ink: #58c81f;
   --brand-bg: #58c81f;
   --brand-fg: #08120a;
   --brand-soft: rgb(88 200 31 / 0.14);
@@ -124,6 +127,29 @@
 
   &:hover {
     text-decoration-color: currentColor;
+  }
+}
+
+/* 细点阵纹理：只用于首屏氛围层，配合遮罩淡出，不参与内容排版 */
+@utility bg-dotgrid {
+  background-image: radial-gradient(
+    color-mix(in oklab, var(--line) 60%, transparent) 1px,
+    transparent 1.4px
+  );
+  background-size: 22px 22px;
+}
+
+/* 移动端菜单入场：纯 transform + opacity，减弱动效时由下式全局关闭 */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-menu-in {
+    animation: menu-in 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
   }
 }
 

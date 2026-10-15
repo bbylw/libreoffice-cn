@@ -88,7 +88,7 @@ function DownloadPage() {
             <p className="eyebrow">下载</p>
           </Reveal>
           <Reveal mode="mount" delay={0.06}>
-            <h1 className="mt-4 max-w-[18ch] text-4xl font-semibold leading-[1.15] tracking-tight text-ink md:text-5xl">
+            <h1 className="mt-4 max-w-[18ch] text-balance text-4xl font-semibold leading-[1.15] tracking-tight text-ink md:text-5xl">
               获取 LibreOffice
             </h1>
           </Reveal>

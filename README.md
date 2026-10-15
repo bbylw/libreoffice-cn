@@ -69,7 +69,7 @@ public/media/      站点使用的真实素材（应用截图、插图、社区�
 
 ## 设计约定
 
-- **单一强调色**：取自品牌绿 `#18a303`。图形用原色，文字与按钮用加深版 `#0e6a02`（对比度 6.7:1，满足 WCAG AA）。
+- **单一强调色**：取自品牌绿 `#18a303`。图形用原色，文字链接用 `--brand-ink`（浅色 `#0e6a02`、深色 `#58c81f`，对比度满足 WCAG AA），按钮底统一用 `--brand-bg`。
 - **形状系统**：卡片 16px、控件 10px，仅版本徽标使用胶囊形。
 - **深浅主题**：`<html data-theme>` 驱动，内联脚本在首帧前决定主题，避免闪烁；切换结果写入 localStorage。
 - **动效**：只动 `transform` 与 `opacity`，全部通过 `useReducedMotion()` 尊重 `prefers-reduced-motion`。

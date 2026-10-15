@@ -56,7 +56,7 @@ function DevelopPage() {
             <p className="eyebrow">开发者指南</p>
           </Reveal>
           <Reveal mode="mount" delay={0.06}>
-            <h1 className="mt-4 max-w-[20ch] text-4xl font-semibold leading-[1.15] tracking-tight text-ink md:text-5xl">
+            <h1 className="mt-4 max-w-[20ch] text-balance text-4xl font-semibold leading-[1.15] tracking-tight text-ink md:text-5xl">
               把改动放进 LibreOffice
             </h1>
           </Reveal>

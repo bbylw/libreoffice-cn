@@ -71,7 +71,7 @@ export function SiteHeader() {
       </div>
 
       {open ? (
-        <div id="mobile-nav" className="border-t border-line bg-surface md:hidden">
+        <div id="mobile-nav" className="animate-menu-in border-t border-line bg-surface md:hidden">
           <nav aria-label="移动端导航" className="container-page flex flex-col py-3">
             {navItems.map((item) => (
               <Link

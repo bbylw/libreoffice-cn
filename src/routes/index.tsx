@@ -77,14 +77,22 @@ function HomePage() {
   return (
     <>
       {/* 首屏：左侧文案，右侧真实产品截图 */}
-      <section className="border-b border-line">
-        <div className="container-page grid items-center gap-12 py-14 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] md:gap-14 md:py-20">
+      <section className="relative overflow-hidden border-b border-line">
+        <div
+          aria-hidden="true"
+          className="bg-dotgrid pointer-events-none absolute inset-0 [mask-image:radial-gradient(70%_60%_at_70%_18%,black,transparent)]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 right-[-8%] size-[420px] rounded-full bg-brand-soft blur-3xl"
+        />
+        <div className="container-page relative grid items-center gap-12 py-14 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] md:gap-14 md:py-20">
           <div>
             <Reveal mode="mount">
               <p className="eyebrow">开源办公套件</p>
             </Reveal>
             <Reveal mode="mount" delay={0.06}>
-              <h1 className="mt-4 text-[1.75rem] font-semibold leading-[1.2] tracking-tight text-ink md:text-[3rem] md:leading-[1.16]">
+              <h1 className="mt-4 text-balance text-[1.75rem] font-semibold leading-[1.2] tracking-tight text-ink md:text-[3rem] md:leading-[1.16]">
                 由你创造，
                 <br />
                 为你而生的开源办公套件
@@ -110,6 +118,11 @@ function HomePage() {
 
           <Reveal mode="mount" delay={0.1} y={26}>
             <figure className="rounded-card border border-line bg-surface p-2 shadow-[0_28px_70px_-40px_rgba(15,19,21,0.55)] dark:shadow-[0_28px_70px_-40px_rgba(0,0,0,0.9)]">
+              <div aria-hidden="true" className="flex items-center gap-1.5 px-2 pb-2 pt-1">
+                <span className="size-2.5 rounded-full bg-line" />
+                <span className="size-2.5 rounded-full bg-line" />
+                <span className="size-2.5 rounded-full bg-line" />
+              </div>
               <img
                 src="/media/screenshot_writer_hero.png"
                 alt="LibreOffice Writer 打开一份 Writer 指南文档的界面截图"
@@ -159,7 +172,7 @@ function HomePage() {
                       height={app.height}
                       loading="lazy"
                       decoding="async"
-                      className={`w-full object-cover transition-transform duration-500 ${layout.aspect}`}
+                      className={`w-full object-cover transition-transform duration-500 group-hover:scale-[1.02] ${layout.aspect}`}
                     />
                   </div>
                   <div className={`flex flex-1 flex-col p-6 ${layout.row ? 'md:justify-center md:p-8' : ''}`}>
@@ -423,7 +436,7 @@ function HomePage() {
 
           <div>
             <Reveal>
-              <h2 className="text-3xl font-semibold leading-tight tracking-tight text-ink md:text-4xl">
+              <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight text-ink md:text-4xl">
                 由社区维护，也由社区决定方向
               </h2>
             </Reveal>
