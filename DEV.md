@@ -16,9 +16,10 @@ LibreOffice 按固定节奏发布新版本，任何写死的 `26.x.y` 地址都�
 | --- | --- |
 | 繁体中文官网下载页（站内主按钮目标） | https://zh-tw.libreoffice.org/下載/ |
 | 简体中文官网下载页 | https://zh-cn.libreoffice.org/download/libreoffice/ |
-| 国际版下载页 | https://www.libreoffice.org/download/ |
 | 国内镜像（腾讯云） | https://mirrors.cloud.tencent.com/libreoffice/libreoffice/stable/ |
 | 旧版本归档 | https://downloadarchive.documentfoundation.org/libreoffice/old/ |
+
+安装格式只列日常会用到的四种（Flatpak、Snap、移动端、在线版）；源代码与预发布版归入开发者指南，下载页不堆入口。
 
 站内的「最近几个版本带来了什么」只列代表性变化，并把完整清单交给官方发行注记页面。
 

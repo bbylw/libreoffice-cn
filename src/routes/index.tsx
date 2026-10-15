@@ -322,7 +322,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 下载条：主按钮直跳官方页，次按钮进站内选项页；只讲版本策略，不钉死版本号 */}
+      {/* 下载条：只讲版本策略，下载动作收敛到首屏主按钮与站内下载页，不重复堆入口 */}
       <section className="border-y border-line bg-surface-2">
         <div className="container-page py-14 md:py-16">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-center lg:gap-14">
@@ -334,12 +334,8 @@ function HomePage() {
                 本站不写死任何版本号。LibreOffice 按固定节奏发布新版本，安装包统一到官方页面获取，由官方维护为当前稳定版。
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
-                <ButtonLink href={primaryDownloadUrl}>
-                  <DownloadSimpleIcon size={20} weight="bold" />
-                  免费下载
-                </ButtonLink>
                 <ButtonLink to="/download" variant="secondary">
-                  更多下载选项
+                  查看下载选项
                 </ButtonLink>
               </div>
             </div>

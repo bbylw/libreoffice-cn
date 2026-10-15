@@ -4,17 +4,6 @@ import { BrandLogo } from './BrandLogo'
 
 const columns: { title: string; links: { label: string; href: string }[] }[] = [
   {
-    title: '下载',
-    links: [
-      { label: '官方下载页（繁体中文）', href: 'https://zh-tw.libreoffice.org/下載/' },
-      { label: '官方下载页（简体中文）', href: 'https://zh-cn.libreoffice.org/download/libreoffice/' },
-      { label: '国内镜像', href: 'https://mirrors.cloud.tencent.com/libreoffice/libreoffice/stable/' },
-      { label: '发行注记', href: 'https://zh-cn.libreoffice.org/download/release-notes/' },
-      { label: '旧版本归档', href: 'https://downloadarchive.documentfoundation.org/libreoffice/old/' },
-      { label: '扩展与模板', href: 'https://zh-cn.libreoffice.org/discover/templates-and-extensions/' },
-    ],
-  },
-  {
     title: '关于',
     links: [
       { label: '我们是谁', href: 'https://www.libreoffice.org/who-are-we/' },
@@ -52,7 +41,7 @@ export function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-line bg-surface">
       <div className="container-page py-14">
-        <div className="grid gap-10 md:grid-cols-[1.2fr_repeat(4,minmax(0,1fr))]">
+        <div className="grid gap-10 md:grid-cols-[1.2fr_repeat(3,minmax(0,1fr))]">
           <div>
             <BrandLogo height={24} />
             <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-ink-3">

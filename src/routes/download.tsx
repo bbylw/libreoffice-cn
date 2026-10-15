@@ -3,10 +3,8 @@ import {
   BookOpenTextIcon,
   BriefcaseIcon,
   CloudIcon,
-  CodeIcon,
   CubeIcon,
   DeviceMobileIcon,
-  FlaskIcon,
   GlobeHemisphereWestIcon,
   HexagonIcon,
   InfoIcon,
@@ -21,9 +19,10 @@ import { SectionHeading } from '~/components/SectionHeading'
 import { ButtonLink } from '~/components/ButtonLink'
 import {
   downloadNotes,
-  downloadPages,
+  platformEntries,
   formatLinks,
   mirrorEntries,
+  primaryDownloadUrl,
   type FormatLabel,
 } from '~/data/downloads'
 import { buildEnvLinks, requirements } from '~/data/requirements'
@@ -32,9 +31,9 @@ import { seo } from '~/utils/seo'
 export const Route = createFileRoute('/download')({
   head: () => ({
     meta: seo({
-      title: '下载 LibreOffice | 官方下载入口与安装方式',
+      title: '下载 LibreOffice | 按平台选择安装包',
       description:
-        'LibreOffice 版本号持续更新，本站不写死任何版本。提供简体中文官网、繁体中文官网、国际版下载页入口，以及国内镜像、其他安装格式与系统要求。',
+        'LibreOffice 版本号持续更新，本站不写死任何版本。提供 Windows、macOS、Linux 各架构的下载入口，以及国内镜像、其他安装方式与系统要求。',
     }),
   }),
   component: DownloadPage,
@@ -46,8 +45,6 @@ const formatIcons: Record<FormatLabel, typeof CubeIcon> = {
   Snap: HexagonIcon,
   'Android 与 iOS': DeviceMobileIcon,
   'LibreOffice Online': CloudIcon,
-  源代码: CodeIcon,
-  开发测试版: FlaskIcon,
 }
 
 const noteIcons = [ArrowsClockwiseIcon, TranslateIcon, BookOpenTextIcon]
@@ -100,7 +97,7 @@ function DownloadPage() {
           </Reveal>
           <Reveal mode="mount" delay={0.18}>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <ButtonLink href={downloadPages[0].href}>
+              <ButtonLink href={primaryDownloadUrl}>
                 <GlobeHemisphereWestIcon size={20} weight="bold" />
                 前往官方下载页
               </ButtonLink>
@@ -116,30 +113,43 @@ function DownloadPage() {
         <Reveal>
           <SectionHeading
             id="pages"
-            title="官方下载入口"
-            body="三个页面提供的是同一套构建。简体中文官网会按你的系统给出对应安装包，并附带语言包下载。"
+            title="按平台选择"
+            body="选择你的系统与处理器架构，下载文件由官方下载页提供，页面会给出对应安装包与语言包。"
           />
         </Reveal>
 
-        <ul className="mt-8">
-          {downloadPages.map((entry, index) => (
-            <Reveal key={entry.id} as="li" delay={index * 0.05} className="border-b border-line">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {platformEntries.map((entry, index) => (
+            <Reveal key={entry.id} delay={index * 0.04}>
               <a
                 href={entry.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group flex flex-col gap-1.5 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
+                className="group flex h-full flex-col rounded-card border border-line bg-bg p-5 transition-colors hover:border-brand/45"
               >
-                <span className="text-lg font-medium tracking-tight text-ink">
+                <span className="font-mono text-[13px] font-medium tracking-tight text-ink">
                   {entry.label}
                 </span>
-                <span className="max-w-[48ch] text-sm leading-relaxed text-ink-2 sm:text-right">
+                <span className="mt-2 flex-1 text-sm leading-relaxed text-ink-2">
                   {entry.note}
+                </span>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-brand-ink transition-colors dark:text-brand">
+                  前往下载
+                  <svg
+                    viewBox="0 0 16 16"
+                    className="size-3.5 transition-transform group-hover:translate-x-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    aria-hidden="true"
+                  >
+                    <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </span>
               </a>
             </Reveal>
           ))}
-        </ul>
+        </div>
 
         <Reveal delay={0.1}>
           <div className="mt-10 grid gap-x-12 gap-y-1 sm:grid-cols-2">
@@ -169,7 +179,7 @@ function DownloadPage() {
           <Reveal>
             <SectionHeading title="其他安装格式" />
           </Reveal>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {formatLinks.map((item, index) => {
               const Icon = formatIcons[item.label] ?? InfoIcon
               return (

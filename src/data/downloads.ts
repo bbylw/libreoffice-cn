@@ -14,29 +14,50 @@ export interface DownloadEntry {
 
 /**
  * 站内所有“免费下载”类主按钮的统一出口：用户指定的官方下载页。
- * 单独成常量，避免与 downloadPages[0] 产生隐式耦合，重排数组也不会漂移。
+ * 单独成常量，避免与平台入口数组产生隐式耦合，重排数组也不会漂移。
  */
 export const primaryDownloadUrl = 'https://zh-tw.libreoffice.org/下載/'
 
-/** 官方下载页入口。三个页面提供同一套构建，只是说明语言不同。 */
-export const downloadPages: DownloadEntry[] = [
+/**
+ * 平台版本入口。点击统一跳官方下载页：官方页面会识别访问者系统并给出
+ * 对应架构的安装包与语言包，站内不复制下载文件，也不写死版本号。
+ */
+export const platformEntries: DownloadEntry[] = [
   {
-    id: 'zh-tw',
-    label: '繁体中文官网下载页',
-    note: '本站主按钮的跳转目标，同一套构建，并提供语言包与帮助包下载。',
+    id: 'win-x64',
+    label: 'Windows (x86-64)',
+    note: '主流 PC 与笔记本，64 位 Intel 或 AMD 处理器。',
     href: primaryDownloadUrl,
   },
   {
-    id: 'zh-cn',
-    label: '简体中文官网下载页',
-    note: '同一套构建，习惯简体中文说明的读者用这个。',
-    href: 'https://zh-cn.libreoffice.org/download/libreoffice/',
+    id: 'win-arm64',
+    label: 'Windows (ARM64)',
+    note: '骁龙等 ARM 架构的 Windows 设备。',
+    href: primaryDownloadUrl,
   },
   {
-    id: 'intl',
-    label: '国际版下载页',
-    note: '英文为主的通用页面，镜像选择更多。',
-    href: 'https://www.libreoffice.org/download/',
+    id: 'mac-arm64',
+    label: 'macOS (Apple Silicon)',
+    note: 'M 系列芯片的 Mac。',
+    href: primaryDownloadUrl,
+  },
+  {
+    id: 'mac-x64',
+    label: 'macOS (Intel)',
+    note: '较早的 Intel 芯片 Mac。',
+    href: primaryDownloadUrl,
+  },
+  {
+    id: 'linux-x64',
+    label: 'Linux (x86-64)',
+    note: 'DEB、RPM 与 tar.gz 压缩包，按发行版选择。',
+    href: primaryDownloadUrl,
+  },
+  {
+    id: 'linux-arm64',
+    label: 'Linux (ARM64)',
+    note: '树莓派等 ARM 开发板与 ARM 服务器。',
+    href: primaryDownloadUrl,
   },
 ]
 
@@ -47,12 +68,6 @@ export const mirrorEntries: DownloadEntry[] = [
     label: '国内镜像',
     note: '腾讯云镜像，目录结构与官方镜像一致，国内下载通常更快。',
     href: 'https://mirrors.cloud.tencent.com/libreoffice/libreoffice/stable/',
-  },
-  {
-    id: 'stable-dir',
-    label: '官方稳定版目录',
-    note: '按版本列出全部文件，含各架构安装包、语言包与帮助包。',
-    href: 'https://download.documentfoundation.org/libreoffice/stable/',
   },
   {
     id: 'archive',
@@ -67,10 +82,11 @@ export type FormatLabel =
   | 'Snap'
   | 'Android 与 iOS'
   | 'LibreOffice Online'
-  | '源代码'
-  | '开发测试版'
 
-/** 其他打包格式与安装方式，全部指向官方说明页。 */
+/**
+ * 其他安装格式与安装方式，全部指向官方说明页。
+ * 只保留日常使用会用到的四种：源代码与开发测试版走开发者指南，不在下载页堆入口。
+ */
 export const formatLinks: { label: FormatLabel; note: string; href: string }[] = [
   {
     label: 'Flatpak',
@@ -91,16 +107,6 @@ export const formatLinks: { label: FormatLabel; note: string; href: string }[] =
     label: 'LibreOffice Online',
     note: '浏览器里直接打开与编辑文档。',
     href: 'https://zh-cn.libreoffice.org/download/libreoffice-online/',
-  },
-  {
-    label: '源代码',
-    note: '自行编译需要从这里取源码。',
-    href: 'https://zh-cn.libreoffice.org/download/source-code/',
-  },
-  {
-    label: '开发测试版',
-    note: '尝鲜用的预发布版本，不建议日常使用。',
-    href: 'https://zh-cn.libreoffice.org/download/pre-releases/',
   },
 ]
 
