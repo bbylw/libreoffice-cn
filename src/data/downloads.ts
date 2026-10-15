@@ -12,19 +12,25 @@ export interface DownloadEntry {
   href: string
 }
 
-/** 官方下载页入口。 */
+/**
+ * 站内所有“免费下载”类主按钮的统一出口：用户指定的官方下载页。
+ * 单独成常量，避免与 downloadPages[0] 产生隐式耦合，重排数组也不会漂移。
+ */
+export const primaryDownloadUrl = 'https://zh-tw.libreoffice.org/下載/'
+
+/** 官方下载页入口。三个页面提供同一套构建，只是说明语言不同。 */
 export const downloadPages: DownloadEntry[] = [
-  {
-    id: 'zh-cn',
-    label: '简体中文官网下载页',
-    note: '推荐入口。自动识别系统与架构，并提供语言包与帮助包下载。',
-    href: 'https://zh-cn.libreoffice.org/download/libreoffice/',
-  },
   {
     id: 'zh-tw',
     label: '繁体中文官网下载页',
-    note: '同一套构建，说明与界面语言不同。',
-    href: 'https://zh-tw.libreoffice.org/下載/',
+    note: '本站主按钮的跳转目标，同一套构建，并提供语言包与帮助包下载。',
+    href: primaryDownloadUrl,
+  },
+  {
+    id: 'zh-cn',
+    label: '简体中文官网下载页',
+    note: '同一套构建，习惯简体中文说明的读者用这个。',
+    href: 'https://zh-cn.libreoffice.org/download/libreoffice/',
   },
   {
     id: 'intl',
@@ -56,8 +62,16 @@ export const mirrorEntries: DownloadEntry[] = [
   },
 ]
 
+export type FormatLabel =
+  | 'Flatpak'
+  | 'Snap'
+  | 'Android 与 iOS'
+  | 'LibreOffice Online'
+  | '源代码'
+  | '开发测试版'
+
 /** 其他打包格式与安装方式，全部指向官方说明页。 */
-export const formatLinks: { label: string; note: string; href: string }[] = [
+export const formatLinks: { label: FormatLabel; note: string; href: string }[] = [
   {
     label: 'Flatpak',
     note: '沙箱安装，适合不想动系统包管理器的人。',

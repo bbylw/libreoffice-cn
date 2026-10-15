@@ -1,5 +1,7 @@
+export type AreaId = 'design' | 'i18n' | 'marketing' | 'docs' | 'dev' | 'infra' | 'qa'
+
 export interface ContributionArea {
-  id: string
+  id: AreaId
   label: string
   summary: string
   href: string

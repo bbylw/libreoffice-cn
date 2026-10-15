@@ -6,8 +6,8 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: '下载',
     links: [
-      { label: '官方下载页（简体中文）', href: 'https://zh-cn.libreoffice.org/download/libreoffice/' },
       { label: '官方下载页（繁体中文）', href: 'https://zh-tw.libreoffice.org/下載/' },
+      { label: '官方下载页（简体中文）', href: 'https://zh-cn.libreoffice.org/download/libreoffice/' },
       { label: '国内镜像', href: 'https://mirrors.cloud.tencent.com/libreoffice/libreoffice/stable/' },
       { label: '发行注记', href: 'https://zh-cn.libreoffice.org/download/release-notes/' },
       { label: '旧版本归档', href: 'https://downloadarchive.documentfoundation.org/libreoffice/old/' },
@@ -101,9 +101,9 @@ export function SiteFooter() {
         <div className="mt-12 flex flex-col gap-4 border-t border-line pt-6 text-xs leading-relaxed text-ink-3 md:flex-row md:items-start md:justify-between">
           <p className="max-w-[62ch]">
             本站为中文整理站点，内容依据 libreoffice.org 与 LibreOffice/core
-            文档整理，采用知识共享 署名相同方式共享
+            文档整理，采用知识共享署名相同方式共享
             3.0 许可。LibreOffice 源代码以 Mozilla
-            公共许可证 2.0 授权。下载文件均来自 The Document Foundation 官方镜像。
+            公共许可证 2.0 授权。下载入口均指向官方页面、镜像目录与归档站。
           </p>
           <div className="flex shrink-0 items-center gap-5">
             <Link to="/download" className="transition-colors hover:text-ink">

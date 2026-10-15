@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react'
-import type { ReactNode } from 'react'
+import { Children, isValidElement, type ReactNode } from 'react'
 
 interface RevealProps {
   children: ReactNode
@@ -63,7 +63,7 @@ export function RevealGroup({
   step = 0.07,
   amount = 0.15,
 }: {
-  children: ReactNode[]
+  children: ReactNode
   className?: string
   step?: number
   amount?: number
@@ -71,12 +71,15 @@ export function RevealGroup({
   const reduce = useReducedMotion()
   const hidden = { opacity: 0, y: 16 }
   const shown = { opacity: 1, y: 0 }
+  // Children.toArray 会保留（并规范化）每个子元素的 key，
+  // 外层 motion.div 沿用该 key，避免调用方 key 丢失。
+  const items = Children.toArray(children)
 
   return (
     <div className={className}>
-      {children.map((child, i) => (
+      {items.map((child, i) => (
         <motion.div
-          key={i}
+          key={isValidElement(child) && child.key != null ? child.key : i}
           initial={reduce ? false : hidden}
           whileInView={shown}
           viewport={{ once: true, amount }}

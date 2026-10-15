@@ -1,7 +1,8 @@
+import type { ReactNode } from 'react'
 import { Link } from '@tanstack/react-router'
 import { ButtonLink } from './ButtonLink'
 
-export function NotFound({ children }: { children?: unknown }) {
+export function NotFound({ children }: { children?: ReactNode }) {
   return (
     <div className="container-page flex min-h-[60dvh] flex-col items-start justify-center py-20">
       <p className="font-mono text-sm tracking-[0.16em] text-ink-3">404</p>

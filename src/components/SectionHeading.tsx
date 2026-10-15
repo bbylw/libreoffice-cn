@@ -1,17 +1,16 @@
 import type { ReactNode } from 'react'
 
 /**
- * 区块标题。默认竖排：眉标(可选)、标题、说明。
+ * 区块标题。默认竖排：标题、说明。
  * 刻意不做左标题加右侧说明的并排写法。
+ * 眉标只出现在页首 hero，不属于区块标题：需要时调用方自行渲染 <p className="eyebrow">。
  */
 export function SectionHeading({
-  eyebrow,
   title,
   body,
   id,
   className = '',
 }: {
-  eyebrow?: string
   title: ReactNode
   body?: ReactNode
   id?: string
@@ -19,7 +18,6 @@ export function SectionHeading({
 }) {
   return (
     <div className={`max-w-[62ch] ${className}`}>
-      {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
       <h2 id={id} className="mt-3 text-3xl font-semibold leading-tight tracking-tight text-ink md:text-4xl">
         {title}
       </h2>

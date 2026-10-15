@@ -18,6 +18,7 @@ import {
   memberQuotes,
   mentor,
   socials,
+  type AreaId,
 } from '~/data/community'
 import { seo } from '~/utils/seo'
 
@@ -32,8 +33,8 @@ export const Route = createFileRoute('/community')({
   component: CommunityPage,
 })
 
-/** 每个贡献方向配一个同族图标，缺失时回退到通用图标，不允许渲染 undefined。 */
-const areaIcons: Record<string, typeof PaletteIcon> = {
+/** 每个贡献方向配一个同族图标，键与 ContributionArea.id 同源，漂移会在类型层暴露。 */
+const areaIcons: Record<AreaId, typeof PaletteIcon> = {
   design: PaletteIcon,
   i18n: TranslateIcon,
   marketing: MegaphoneIcon,

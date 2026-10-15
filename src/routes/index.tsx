@@ -8,10 +8,10 @@ import {
 import { Reveal, RevealGroup } from '~/components/Reveal'
 import { SectionHeading } from '~/components/SectionHeading'
 import { ButtonLink } from '~/components/ButtonLink'
-import { apps } from '~/data/apps'
+import { apps, type AppLayout } from '~/data/apps'
 import { moduleGroups } from '~/data/modules'
 import { memberQuotes, pressQuotes } from '~/data/community'
-import { downloadFacts } from '~/data/downloads'
+import { downloadFacts, primaryDownloadUrl } from '~/data/downloads'
 import { seo } from '~/utils/seo'
 
 export const Route = createFileRoute('/')({
@@ -64,6 +64,16 @@ const newFeatures = [
   },
 ]
 
+/**
+ * 卡片版式的唯一查表处：数据给 layout，渲染只读表。
+ * 新增应用时只改 data/apps.ts，不碰这里的分支。
+ */
+const appLayouts: Record<AppLayout, { span: string; aspect: string; row: boolean }> = {
+  large: { span: 'md:col-span-3', aspect: 'aspect-[16/10]', row: false },
+  standard: { span: 'md:col-span-2', aspect: 'aspect-[4/3]', row: false },
+  wide: { span: 'md:col-span-6', aspect: 'aspect-[16/10] md:h-full', row: true },
+}
+
 function HomePage() {
   return (
     <>
@@ -88,7 +98,7 @@ function HomePage() {
             </Reveal>
             <Reveal mode="mount" delay={0.18}>
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <ButtonLink to="/download">
+                <ButtonLink href={primaryDownloadUrl}>
                   <DownloadSimpleIcon size={20} weight="bold" />
                   免费下载
                 </ButtonLink>
@@ -130,24 +140,18 @@ function HomePage() {
 
         <div className="mt-10 grid gap-5 md:grid-cols-6">
           {apps.map((app, index) => {
-            const isBase = app.id === 'base'
-            const span =
-              app.id === 'writer' || app.id === 'calc'
-                ? 'md:col-span-3'
-                : isBase
-                  ? 'md:col-span-6'
-                  : 'md:col-span-2'
+            const layout = appLayouts[app.layout]
 
             return (
-              <Reveal key={app.id} className={span} delay={index * 0.05}>
+              <Reveal key={app.id} className={layout.span} delay={index * 0.05}>
                 <article
                   className={`group flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface transition-colors hover:border-brand/45 ${
-                    isBase ? 'md:flex-row' : ''
+                    layout.row ? 'md:flex-row' : ''
                   }`}
                 >
                   <div
                     className={`overflow-hidden bg-surface-2 ${
-                      isBase ? 'md:w-1/2' : ''
+                      layout.row ? 'md:w-1/2' : ''
                     }`}
                   >
                     <img
@@ -157,16 +161,10 @@ function HomePage() {
                       height={app.height}
                       loading="lazy"
                       decoding="async"
-                      className={`w-full object-cover transition-transform duration-500 ${
-                        app.id === 'writer' || app.id === 'calc'
-                          ? 'aspect-[16/10]'
-                          : isBase
-                            ? 'aspect-[16/10] md:h-full'
-                            : 'aspect-[4/3]'
-                      }`}
+                      className={`w-full object-cover transition-transform duration-500 ${layout.aspect}`}
                     />
                   </div>
-                  <div className={`flex flex-1 flex-col p-6 ${isBase ? 'md:justify-center md:p-8' : ''}`}>
+                  <div className={`flex flex-1 flex-col p-6 ${layout.row ? 'md:justify-center md:p-8' : ''}`}>
                     <div className="flex items-center gap-3">
                       <img src={app.icon} alt="" width={28} height={28} className="size-7" />
                       <h3 className="text-xl font-semibold tracking-tight text-ink">
@@ -313,7 +311,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 下载条：整块底色加三条说明，说明版本策略而不是钉死版本号 */}
+      {/* 下载条：主按钮直跳官方页，次按钮进站内选项页；只讲版本策略，不钉死版本号 */}
       <section className="border-y border-line bg-surface-2">
         <div className="container-page py-14 md:py-16">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-center lg:gap-14">
@@ -322,15 +320,15 @@ function HomePage() {
                 下载当前稳定版
               </h2>
               <p className="mt-3 max-w-[44ch] text-[15px] text-ink-2">
-                本站不写死任何版本号。LibreOffice 按固定节奏发布新版本，安装包统一到官方页面获取，那里的版本永远是最新的。
+                本站不写死任何版本号。LibreOffice 按固定节奏发布新版本，安装包统一到官方页面获取，由官方维护为当前稳定版。
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
-                <ButtonLink to="/download">
+                <ButtonLink href={primaryDownloadUrl}>
                   <DownloadSimpleIcon size={20} weight="bold" />
                   免费下载
                 </ButtonLink>
-                <ButtonLink href="https://zh-cn.libreoffice.org/download/libreoffice/" variant="secondary">
-                  直接去官网
+                <ButtonLink to="/download" variant="secondary">
+                  更多下载选项
                   <ArrowRightIcon size={18} weight="bold" />
                 </ButtonLink>
               </div>

@@ -12,8 +12,8 @@ LibreOffice 按固定节奏发布新版本，任何写死的 `26.x.y` 地址都�
 
 | 入口 | 地址 |
 | --- | --- |
-| 简体中文官网下载页（推荐） | https://zh-cn.libreoffice.org/download/libreoffice/ |
-| 繁体中文官网下载页 | https://zh-tw.libreoffice.org/下載/ |
+| 繁体中文官网下载页（站内主按钮目标） | https://zh-tw.libreoffice.org/下載/ |
+| 简体中文官网下载页 | https://zh-cn.libreoffice.org/download/libreoffice/ |
 | 国际版下载页 | https://www.libreoffice.org/download/ |
 | 国内镜像（腾讯云） | https://mirrors.cloud.tencent.com/libreoffice/libreoffice/stable/ |
 | 旧版本归档 | https://downloadarchive.documentfoundation.org/libreoffice/old/ |

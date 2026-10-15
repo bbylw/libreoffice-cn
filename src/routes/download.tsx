@@ -25,6 +25,7 @@ import {
   downloadPages,
   formatLinks,
   mirrorEntries,
+  type FormatLabel,
 } from '~/data/downloads'
 import { buildEnvLinks, requirements } from '~/data/requirements'
 import { seo } from '~/utils/seo'
@@ -40,8 +41,8 @@ export const Route = createFileRoute('/download')({
   component: DownloadPage,
 })
 
-/** 图标按名称匹配，缺失时退回通用图标，避免渲染出 undefined。 */
-const formatIcons: Record<string, typeof CubeIcon> = {
+/** 图标按名称匹配，键与 formatLinks 的 label 同源，漂移会在类型层暴露。 */
+const formatIcons: Record<FormatLabel, typeof CubeIcon> = {
   Flatpak: CubeIcon,
   Snap: HexagonIcon,
   'Android 与 iOS': DeviceMobileIcon,
@@ -95,7 +96,7 @@ function DownloadPage() {
           <Reveal mode="mount" delay={0.12}>
             <p className="mt-5 max-w-[56ch] text-base text-ink-2 md:text-[17px]">
               LibreOffice 按固定节奏发布新版本，写死的版本号很快就会过期。
-              本站不固定任何版本，安装包请到官方页面获取，那里永远提供当前的稳定版。
+              本站不固定任何版本，安装包请到官方页面获取，由官方维护为当前稳定版。
             </p>
           </Reveal>
           <Reveal mode="mount" delay={0.18}>

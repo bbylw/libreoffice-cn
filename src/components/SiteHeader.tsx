@@ -3,6 +3,8 @@ import { Link } from '@tanstack/react-router'
 import { ListIcon, XIcon } from '@phosphor-icons/react'
 import { ThemeToggle } from './ThemeToggle'
 import { BrandLogo } from './BrandLogo'
+import { ButtonLink } from './ButtonLink'
+import { primaryDownloadUrl } from '~/data/downloads'
 
 const navItems = [
   { to: '/', label: '首页' },
@@ -10,9 +12,6 @@ const navItems = [
   { to: '/develop', label: '开发者' },
   { to: '/community', label: '社区' },
 ] as const
-
-const ctaClass =
-  'h-10 items-center justify-center rounded-control bg-brand-bg px-4 text-sm font-medium text-brand-fg transition-transform hover:opacity-95 active:scale-[0.98]'
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
@@ -55,9 +54,9 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <Link to="/download" className={`${ctaClass} hidden md:inline-flex`}>
+          <ButtonLink href={primaryDownloadUrl} size="sm" className="hidden md:inline-flex">
             免费下载
-          </Link>
+          </ButtonLink>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -86,9 +85,14 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <Link to="/download" className={`${ctaClass} mt-3 flex w-full`} onClick={() => setOpen(false)}>
+            <ButtonLink
+              href={primaryDownloadUrl}
+              size="sm"
+              className="mt-3 w-full"
+              onClick={() => setOpen(false)}
+            >
               免费下载
-            </Link>
+            </ButtonLink>
           </nav>
         </div>
       ) : null}

@@ -2,6 +2,12 @@ import { Link, useLocation, useRouter } from '@tanstack/react-router'
 import type { ErrorComponentProps } from '@tanstack/react-router'
 import { WarningCircleIcon } from '@phosphor-icons/react'
 
+const primaryBtn =
+  'inline-flex h-11 items-center rounded-control bg-brand-bg px-5 text-[15px] font-medium text-brand-fg transition-opacity hover:opacity-95 active:scale-[0.98]'
+
+const ghostBtn =
+  'inline-flex h-11 items-center rounded-control border border-line bg-surface px-5 text-[15px] font-medium text-ink transition-colors hover:border-brand/50 active:scale-[0.98]'
+
 export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
   const router = useRouter()
   const isRoot = useLocation({
@@ -23,31 +29,17 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
         {error instanceof Error ? error.message : String(error)}
       </pre>
       <div className="flex flex-wrap items-center gap-3">
-        <button
-          type="button"
-          onClick={() => router.invalidate()}
-          className="inline-flex h-11 items-center rounded-control bg-brand-bg px-5 text-[15px] font-medium text-brand-fg transition-opacity hover:opacity-95 active:scale-[0.98]"
-        >
+        <button type="button" onClick={() => router.invalidate()} className={primaryBtn}>
           重试
         </button>
         {isRoot ? (
-          <Link
-            to="/"
-            className="inline-flex h-11 items-center rounded-control border border-line bg-surface px-5 text-[15px] font-medium text-ink transition-colors hover:border-brand/50 active:scale-[0.98]"
-          >
+          <Link to="/" className={ghostBtn}>
             返回首页
           </Link>
         ) : (
-          <Link
-            to="/"
-            className="inline-flex h-11 items-center rounded-control border border-line bg-surface px-5 text-[15px] font-medium text-ink transition-colors hover:border-brand/50 active:scale-[0.98]"
-            onClick={(e) => {
-              e.preventDefault()
-              window.history.back()
-            }}
-          >
+          <button type="button" onClick={() => window.history.back()} className={ghostBtn}>
             返回上一页
-          </Link>
+          </button>
         )}
       </div>
     </div>
