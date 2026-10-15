@@ -6,11 +6,12 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: '下载',
     links: [
-      { label: '个人使用', href: 'https://www.libreoffice.org/download/' },
-      { label: '其他版本与安装方式', href: 'https://www.libreoffice.org/download/download-other/' },
-      { label: '发布说明', href: 'https://www.libreoffice.org/download/release-notes/' },
+      { label: '官方下载页（简体中文）', href: 'https://zh-cn.libreoffice.org/download/libreoffice/' },
+      { label: '官方下载页（繁体中文）', href: 'https://zh-tw.libreoffice.org/下載/' },
+      { label: '国内镜像', href: 'https://mirrors.cloud.tencent.com/libreoffice/libreoffice/stable/' },
+      { label: '发行注记', href: 'https://zh-cn.libreoffice.org/download/release-notes/' },
       { label: '旧版本归档', href: 'https://downloadarchive.documentfoundation.org/libreoffice/old/' },
-      { label: '扩展与模板', href: 'https://extensions.libreoffice.org/' },
+      { label: '扩展与模板', href: 'https://zh-cn.libreoffice.org/discover/templates-and-extensions/' },
     ],
   },
   {

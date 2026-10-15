@@ -11,15 +11,15 @@ import { ButtonLink } from '~/components/ButtonLink'
 import { apps } from '~/data/apps'
 import { moduleGroups } from '~/data/modules'
 import { memberQuotes, pressQuotes } from '~/data/community'
-import { currentVersion, homeQuickDownloads } from '~/data/releases'
+import { downloadFacts } from '~/data/downloads'
 import { seo } from '~/utils/seo'
 
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: seo({
-      title: `LibreOffice ${currentVersion} 中文站 | 免费开源办公套件`,
+      title: 'LibreOffice 中文站 | 免费开源办公套件',
       description:
-        'LibreOffice 是一套开源办公套件，兼容绝大多数文档格式与标准。这里提供 26.8.1 的下载入口、六款应用的介绍、代码结构速览与社区参与方式。',
+        'LibreOffice 是一套开源办公套件，兼容绝大多数文档格式与标准。这里整理六款应用的介绍、官方下载入口、代码结构速览与社区参与方式。',
     }),
   }),
   component: HomePage,
@@ -72,7 +72,7 @@ function HomePage() {
         <div className="container-page grid items-center gap-12 py-14 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] md:gap-14 md:py-20">
           <div>
             <Reveal mode="mount">
-              <p className="eyebrow">LibreOffice {currentVersion}</p>
+              <p className="eyebrow">开源办公套件</p>
             </Reveal>
             <Reveal mode="mount" delay={0.06}>
               <h1 className="mt-4 text-[1.75rem] font-semibold leading-[1.2] tracking-tight text-ink md:text-[3rem] md:leading-[1.16]">
@@ -112,7 +112,7 @@ function HomePage() {
                 className="w-full rounded-[10px]"
               />
               <figcaption className="px-3 py-3 text-xs text-ink-3">
-                Writer 26.8.1：样式、导航窗格与状态栏在同一屏内协作。
+                Writer 界面：样式、导航窗格与状态栏在同一屏内协作。
               </figcaption>
             </figure>
           </Reveal>
@@ -245,7 +245,7 @@ function HomePage() {
       <section className="container-page py-20 md:py-28">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <Reveal className="lg:col-span-7">
-            <p className="eyebrow">26.8 新特性</p>
+            <p className="eyebrow">新功能</p>
             <figure className="mt-5">
               <div className="overflow-hidden rounded-card border border-line bg-surface p-2">
                 <img
@@ -267,8 +267,11 @@ function HomePage() {
           <div className="lg:col-span-5">
             <Reveal>
               <h2 className="text-3xl font-semibold leading-tight tracking-tight text-ink md:text-4xl">
-                这一版里有什么
+                最近几个版本带来了什么
               </h2>
+              <p className="mt-4 max-w-[46ch] text-[15px] leading-relaxed text-ink-2">
+                下面列出的是近期几个版本里比较有代表性的变化，不是当前版本的完整清单。
+              </p>
             </Reveal>
             <div className="mt-8 flex flex-col gap-8">
               {newFeatures.map((feature, index) => (
@@ -297,12 +300,12 @@ function HomePage() {
             </div>
             <Reveal delay={0.2}>
               <a
-                href="https://www.libreoffice.org/download/release-notes/"
+                href="https://zh-cn.libreoffice.org/download/release-notes/"
                 target="_blank"
                 rel="noreferrer noopener"
                 className="mt-8 inline-flex items-center gap-2 text-sm text-ink-2 transition-colors hover:text-brand-ink dark:hover:text-brand"
               >
-                查看完整发布说明
+                查看当前版本的完整发行注记
                 <ArrowRightIcon size={17} weight="bold" />
               </a>
             </Reveal>
@@ -310,46 +313,40 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 下载条：整块底色加 2x2 直链，不做卡片 */}
+      {/* 下载条：整块底色加三条说明，说明版本策略而不是钉死版本号 */}
       <section className="border-y border-line bg-surface-2">
-        <div className="container-page grid gap-8 py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-center lg:gap-14 md:py-16">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
-              把 {currentVersion} 装到你的机器上
-            </h2>
-            <p className="mt-3 max-w-[42ch] text-[15px] text-ink-2">
-              以下链接直接指向 The Document Foundation
-              的官方镜像。需要旧版本、Linux 其他格式或离线帮助包，请到下载页选择。
-            </p>
-            <ButtonLink to="/download" variant="secondary" className="mt-6">
-              全部下载选项
-              <ArrowRightIcon size={18} weight="bold" />
-            </ButtonLink>
-          </div>
+        <div className="container-page py-14 md:py-16">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-center lg:gap-14">
+            <div>
+              <h2 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
+                下载当前稳定版
+              </h2>
+              <p className="mt-3 max-w-[44ch] text-[15px] text-ink-2">
+                本站不写死任何版本号。LibreOffice 按固定节奏发布新版本，安装包统一到官方页面获取，那里的版本永远是最新的。
+              </p>
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <ButtonLink to="/download">
+                  <DownloadSimpleIcon size={20} weight="bold" />
+                  免费下载
+                </ButtonLink>
+                <ButtonLink href="https://zh-cn.libreoffice.org/download/libreoffice/" variant="secondary">
+                  直接去官网
+                  <ArrowRightIcon size={18} weight="bold" />
+                </ButtonLink>
+              </div>
+            </div>
 
-          <RevealGroup className="grid gap-x-8 gap-y-1 sm:grid-cols-2">
-            {homeQuickDownloads.map((item) => (
-              <a
-                key={item.key}
-                href={item.build.url}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="group flex items-center justify-between gap-4 border-b border-line py-4 transition-colors hover:text-brand-ink dark:hover:text-brand"
-              >
-                <span>
-                  <span className="block text-base font-medium text-ink">{item.label}</span>
-                  <span className="mt-0.5 block font-mono text-xs text-ink-3">
-                    {item.meta}
-                  </span>
-                </span>
-                <DownloadSimpleIcon
-                  size={20}
-                  weight="bold"
-                  className="shrink-0 text-ink-3 transition-transform group-hover:translate-y-0.5"
-                />
-              </a>
-            ))}
-          </RevealGroup>
+            <dl className="grid gap-x-8 sm:grid-cols-3">
+              {downloadFacts.map((fact, index) => (
+                <Reveal key={fact.title} delay={index * 0.06}>
+                  <div className="border-t border-line py-5 sm:mt-0 sm:pt-5">
+                    <dt className="text-[15px] font-medium text-ink">{fact.title}</dt>
+                    <dd className="mt-1.5 text-sm leading-relaxed text-ink-2">{fact.body}</dd>
+                  </div>
+                </Reveal>
+              ))}
+            </dl>
+          </div>
         </div>
       </section>
 

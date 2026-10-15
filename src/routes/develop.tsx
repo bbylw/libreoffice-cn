@@ -27,7 +27,7 @@ const includeSample = `#include "myhelper.hxx"                    // 与当前�
 #include "com/sun/star/uno/XComponent.hxx"     // UNO API 统一用双引号`
 
 const learnMore = [
-  { label: '邮件列表 libreoffice@lists.freedesktop.org', href: 'https://lists.freedesktop.org/archives/list/libreoffice/' },
+  { label: '邮件列表 libreoffice@lists.freedesktop.org', href: 'https://lists.freedesktop.org/archives/libreoffice/' },
   { label: 'IRC 频道 #libreoffice-dev（irc.libera.chat）', href: 'https://web.libera.chat/#libreoffice-dev' },
   { label: 'TDF Wiki 构建说明', href: 'https://wiki.documentfoundation.org/Development/How_to_build' },
   { label: 'API 文档 api.libreoffice.org', href: 'https://api.libreoffice.org/' },

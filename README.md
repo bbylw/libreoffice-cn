@@ -1,9 +1,24 @@
 # LibreOffice 中文站
 
-一个以 **TanStack Start + Bun** 构建的中文内容站，介绍 LibreOffice 26.8.1：下载入口、六款应用、代码结构速览与社区参与方式。
+一个以 **TanStack Start + Bun** 构建的中文内容站，介绍 LibreOffice：官方下载入口、六款应用、代码结构速览与社区参与方式。
 
-内容依据 [libreoffice.org](https://www.libreoffice.org/)、[下载页](https://www.libreoffice.org/download/download-libreoffice/) 与
-[LibreOffice/core README](https://github.com/LibreOffice/core) 整理，下载链接指向 The Document Foundation 官方镜像。
+内容依据 [libreoffice.org](https://www.libreoffice.org/)、[简体中文官网](https://zh-cn.libreoffice.org/) 与
+[LibreOffice/core README](https://github.com/LibreOffice/core) 整理。
+
+## 下载策略：站内不写死任何版本号
+
+LibreOffice 按固定节奏发布新版本，任何写死的 `26.x.y` 地址都会过期，也可能让读者装到过时版本。
+因此全站没有一处版本号或版本化的安装包地址，所有下载入口都是与版本无关的官方页面，由官方页面给出当前稳定版：
+
+| 入口 | 地址 |
+| --- | --- |
+| 简体中文官网下载页（推荐） | https://zh-cn.libreoffice.org/download/libreoffice/ |
+| 繁体中文官网下载页 | https://zh-tw.libreoffice.org/下載/ |
+| 国际版下载页 | https://www.libreoffice.org/download/ |
+| 国内镜像（腾讯云） | https://mirrors.cloud.tencent.com/libreoffice/libreoffice/stable/ |
+| 旧版本归档 | https://downloadarchive.documentfoundation.org/libreoffice/old/ |
+
+站内的「最近几个版本带来了什么」只列代表性变化，并把完整清单交给官方发行注记页面。
 
 ## 技术栈
 
@@ -34,8 +49,8 @@ bun start      # 以 bun 运行生产构建的 nitro 服务
 
 | 路径 | 说明 |
 | --- | --- |
-| `/` | 首页：首屏、六款应用、选择理由、26.8 新特性、下载条、代码结构、社区与评价 |
-| `/download` | 下载矩阵（版本 / 系统 / 架构 / 包类型）、运行与构建要求、其他获取方式 |
+| `/` | 首页：首屏、六款应用、选择理由、近期新功能、下载说明、代码结构、社区与评价 |
+| `/download` | 官方下载入口、国内镜像、其他安装格式、版本与语言包说明、系统要求 |
 | `/develop` | 两条开发路径、关键模块、`#include` 规则、求助渠道 |
 | `/community` | 入门面谈、七个贡献方向、社区活动、官方账号 |
 | 未匹配 | 中文 404 页 |
@@ -44,8 +59,8 @@ bun start      # 以 bun 运行生产构建的 nitro 服务
 
 ```
 src/
-  components/      页头、页脚、主题切换、下载矩阵、入场动效、404 与错误边界
-  data/            纯数据：版本矩阵、六款应用、模块说明、系统要求、社区信息
+  components/      页头、页脚、品牌标志、主题切换、入场动效、404 与错误边界
+  data/            纯数据：下载入口、六款应用、模块说明、系统要求、社区信息
   routes/          文件式路由，每个路由自带 head()（标题、描述、OG）
   styles/app.css   设计令牌（颜色、字体、圆角）、深浅主题、基础样式
   router.tsx       路由器装配
@@ -62,8 +77,8 @@ public/media/      站点使用的真实素材（应用截图、插图、社区�
 
 ## 数据来源
 
-- 下载地址按官方镜像目录规则生成：`https://download.documentfoundation.org/libreoffice/stable/<版本>/<平台>/<架构>/<文件名>`，同时给出 `.torrent` 与 `.mirrorlist`。版本号取自官方下载页当前的 26.8.1（稳定版）与 26.2.6（维护版）。
-- 系统要求取自 LibreOffice/core README 的「构建链与运行时基线」。
+- 下载入口全部为与版本无关的官方页面（简体中文官网、繁体中文官网、国际版、腾讯云镜像、旧版本归档），已逐个校验返回 200。
+- 系统要求取自 LibreOffice/core README 的「构建链与运行时基线」，与具体发行版无关。
 - 模块说明取自同一份 README 的「代码中的关键部分」。
 - 截图与插图来自 libreoffice.org 官方媒体目录（CC BY-SA 3.0）。
 

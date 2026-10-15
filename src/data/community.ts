@@ -40,7 +40,7 @@ export const contributionAreas: ContributionArea[] = [
     id: 'infra',
     label: '基础设施',
     summary: '构建系统、镜像站与发布流程。',
-    href: 'https://www.documentfoundation.org/Category:Infrastructure',
+    href: 'https://wiki.documentfoundation.org/Category:Infrastructure',
   },
   {
     id: 'qa',
