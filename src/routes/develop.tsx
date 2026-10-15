@@ -155,7 +155,7 @@ function DevelopPage() {
 
       <section className="container-page py-20 md:py-24">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14">
-          <div>
+          <div className="min-w-0">
             <Reveal>
               <SectionHeading
                 title="#include 指令规则"
@@ -179,7 +179,7 @@ function DevelopPage() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.08}>
+          <Reveal delay={0.08} className="min-w-0">
             <div className="overflow-hidden rounded-card border border-line bg-surface">
               <div className="flex items-center gap-2 border-b border-line px-5 py-3">
                 <TerminalWindowIcon size={18} weight="bold" className="text-ink-3" />

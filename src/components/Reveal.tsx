@@ -10,6 +10,8 @@ interface RevealProps {
   /** mount: 首屏挂载即播放；view: 滚动进入视口时播放 */
   mode?: 'mount' | 'view'
   amount?: number
+  /** 容器元素。列表项传 li，避免 ul > div > li 的非法嵌套 */
+  as?: 'div' | 'li'
 }
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -25,27 +27,29 @@ export function Reveal({
   className,
   mode = 'view',
   amount = 0.2,
+  as = 'div',
 }: RevealProps) {
   const reduce = useReducedMotion()
+  const Motion = as === 'li' ? motion.li : motion.div
   const hidden = { opacity: 0, y }
   const shown = { opacity: 1, y: 0 }
   const transition = { duration: 0.6, delay, ease: EASE }
 
   if (mode === 'mount') {
     return (
-      <motion.div
+      <Motion
         className={className}
         initial={reduce ? false : hidden}
         animate={shown}
         transition={transition}
       >
         {children}
-      </motion.div>
+      </Motion>
     )
   }
 
   return (
-    <motion.div
+    <Motion
       className={className}
       initial={reduce ? false : hidden}
       whileInView={shown}
@@ -53,7 +57,7 @@ export function Reveal({
       transition={transition}
     >
       {children}
-    </motion.div>
+    </Motion>
   )
 }
 

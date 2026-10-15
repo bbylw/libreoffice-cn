@@ -14,9 +14,9 @@ const sizes: Record<Size, string> = {
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-brand-bg text-brand-fg shadow-[0_10px_24px_-12px_rgb(0_0_0/0.4)] hover:opacity-95',
+    'bg-brand-bg text-brand-fg shadow-[0_10px_24px_-12px_rgb(0_0_0/0.4)] hover:-translate-y-0.5 hover:shadow-[0_16px_30px_-12px_rgb(0_0_0/0.45)]',
   secondary:
-    'border border-line bg-surface text-ink hover:border-brand/50 hover:bg-surface-2',
+    'border border-line bg-surface text-ink hover:-translate-y-0.5 hover:border-brand/50 hover:bg-surface-2',
 }
 
 interface CommonProps {

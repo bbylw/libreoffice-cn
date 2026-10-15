@@ -123,22 +123,20 @@ function DownloadPage() {
 
         <ul className="mt-8">
           {downloadPages.map((entry, index) => (
-            <Reveal key={entry.id} delay={index * 0.05}>
-              <li className="border-b border-line">
-                <a
-                  href={entry.href}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="group flex flex-col gap-1.5 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
-                >
-                  <span className="text-lg font-medium tracking-tight text-ink">
-                    {entry.label}
-                  </span>
-                  <span className="max-w-[48ch] text-sm leading-relaxed text-ink-2 sm:text-right">
-                    {entry.note}
-                  </span>
-                </a>
-              </li>
+            <Reveal key={entry.id} as="li" delay={index * 0.05} className="border-b border-line">
+              <a
+                href={entry.href}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="group flex flex-col gap-1.5 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
+              >
+                <span className="text-lg font-medium tracking-tight text-ink">
+                  {entry.label}
+                </span>
+                <span className="max-w-[48ch] text-sm leading-relaxed text-ink-2 sm:text-right">
+                  {entry.note}
+                </span>
+              </a>
             </Reveal>
           ))}
         </ul>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { ListIcon, XIcon } from '@phosphor-icons/react'
 import { ThemeToggle } from './ThemeToggle'
@@ -15,6 +15,16 @@ const navItems = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
+
+  // 菜单展开时按 Esc 关闭，与移动端抽屉的常见行为一致
+  useEffect(() => {
+    if (!open) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [open])
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-bg/88 backdrop-blur-md">

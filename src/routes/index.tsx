@@ -220,30 +220,31 @@ function HomePage() {
 
           <ul className="mt-10 max-w-[76ch]">
             {reasons.map((reason, index) => (
-              <Reveal key={reason.id} delay={index * 0.06}>
-                <li
-                  className={`grid gap-5 py-8 sm:grid-cols-[88px_minmax(0,1fr)] sm:items-center ${
-                    index > 0 ? 'border-t border-line' : ''
-                  }`}
-                >
-                  <img
-                    src={reason.image}
-                    alt=""
-                    width={280}
-                    height={260}
-                    loading="lazy"
-                    decoding="async"
-                    className="size-20 justify-self-start sm:size-[88px]"
-                  />
-                  <div>
-                    <h3 className="text-lg font-semibold tracking-tight text-ink">
-                      {reason.title}
-                    </h3>
-                    <p className="mt-2 max-w-[56ch] text-[15px] leading-relaxed text-ink-2">
-                      {reason.body}
-                    </p>
-                  </div>
-                </li>
+              <Reveal
+                key={reason.id}
+                as="li"
+                delay={index * 0.06}
+                className={`grid gap-5 py-8 sm:grid-cols-[88px_minmax(0,1fr)] sm:items-center ${
+                  index > 0 ? 'border-t border-line' : ''
+                }`}
+              >
+                <img
+                  src={reason.image}
+                  alt=""
+                  width={280}
+                  height={260}
+                  loading="lazy"
+                  decoding="async"
+                  className="size-20 justify-self-start sm:size-[88px]"
+                />
+                <div>
+                  <h3 className="text-lg font-semibold tracking-tight text-ink">
+                    {reason.title}
+                  </h3>
+                  <p className="mt-2 max-w-[56ch] text-[15px] leading-relaxed text-ink-2">
+                    {reason.body}
+                  </p>
+                </div>
               </Reveal>
             ))}
           </ul>
@@ -345,11 +346,13 @@ function HomePage() {
 
             <dl className="grid gap-x-8 sm:grid-cols-3">
               {downloadFacts.map((fact, index) => (
-                <Reveal key={fact.title} delay={index * 0.06}>
-                  <div className="border-t border-line py-5 sm:mt-0 sm:pt-5">
-                    <dt className="text-[15px] font-medium text-ink">{fact.title}</dt>
-                    <dd className="mt-1.5 text-sm leading-relaxed text-ink-2">{fact.body}</dd>
-                  </div>
+                <Reveal
+                  key={fact.title}
+                  delay={index * 0.06}
+                  className="border-t border-line py-5 sm:mt-0 sm:pt-5"
+                >
+                  <dt className="text-[15px] font-medium text-ink">{fact.title}</dt>
+                  <dd className="mt-1.5 text-sm leading-relaxed text-ink-2">{fact.body}</dd>
                 </Reveal>
               ))}
             </dl>

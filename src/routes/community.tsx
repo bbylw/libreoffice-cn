@@ -117,29 +117,28 @@ function CommunityPage() {
               return (
                 <Reveal
                   key={area.id}
+                  as="li"
                   delay={index * 0.04}
-                  className={orphan ? 'sm:col-span-2' : ''}
+                  className={`border-b border-line ${orphan ? 'sm:col-span-2' : ''}`}
                 >
-                  <li className="border-b border-line">
-                    <a
-                      href={area.href}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="group flex items-start gap-4 py-5"
-                    >
-                      <span className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-control border border-line bg-bg text-ink-2 transition-colors group-hover:border-brand/50 group-hover:text-brand-ink dark:group-hover:text-brand">
-                        <Icon size={19} weight="bold" />
+                  <a
+                    href={area.href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="group flex items-start gap-4 py-5"
+                  >
+                    <span className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-control border border-line bg-bg text-ink-2 transition-colors group-hover:border-brand/50 group-hover:text-brand-ink dark:group-hover:text-brand">
+                      <Icon size={19} weight="bold" />
+                    </span>
+                    <span className="flex-1">
+                      <span className="block text-base font-medium text-ink">
+                        {area.label}
                       </span>
-                      <span className="flex-1">
-                        <span className="block text-base font-medium text-ink">
-                          {area.label}
-                        </span>
-                        <span className="mt-1 block text-sm leading-relaxed text-ink-2">
-                          {area.summary}
-                        </span>
+                      <span className="mt-1 block text-sm leading-relaxed text-ink-2">
+                        {area.summary}
                       </span>
-                    </a>
-                  </li>
+                    </span>
+                  </a>
                 </Reveal>
               )
             })}
