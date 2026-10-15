@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 import {
-  ArrowSquareOutIcon,
   CheckCircleIcon,
   TerminalWindowIcon,
 } from '@phosphor-icons/react'
@@ -101,10 +100,9 @@ function DevelopPage() {
                       href={link.href}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="inline-flex items-center gap-1.5 text-sm text-ink-2 transition-colors hover:text-brand-ink dark:hover:text-brand"
+                      className="text-sm text-ink-2 transition-colors hover:text-brand-ink dark:hover:text-brand"
                     >
                       {link.label}
-                      <ArrowSquareOutIcon size={15} weight="bold" />
                     </a>
                   ))}
                 </div>
@@ -174,10 +172,9 @@ function DevelopPage() {
                 href={includeRule.discussion}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="mt-4 inline-flex items-center gap-1.5 text-sm text-ink-2 transition-colors hover:text-brand-ink dark:hover:text-brand"
+                className="mt-4 text-sm text-ink-2 transition-colors hover:text-brand-ink dark:hover:text-brand link-underline"
               >
                 规则讨论原文
-                <ArrowSquareOutIcon size={15} weight="bold" />
               </a>
             </Reveal>
           </div>
@@ -231,10 +228,9 @@ function DevelopPage() {
                     href={link.href}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="flex items-center justify-between gap-4 py-4 text-[15px] text-ink-2 transition-colors hover:text-ink"
+                    className="block py-4 text-[15px] text-ink-2 transition-colors hover:text-ink"
                   >
                     {link.label}
-                    <ArrowSquareOutIcon size={16} weight="bold" className="shrink-0 text-ink-3" />
                   </a>
                 </li>
               ))}

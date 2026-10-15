@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 import {
-  ArrowRightIcon,
   BookOpenTextIcon,
   CodeIcon,
   DownloadSimpleIcon,
@@ -104,7 +103,6 @@ function HomePage() {
                 </ButtonLink>
                 <ButtonLink to="/develop" variant="secondary">
                   阅读开发指南
-                  <ArrowRightIcon size={18} weight="bold" />
                 </ButtonLink>
               </div>
             </Reveal>
@@ -304,7 +302,6 @@ function HomePage() {
                 className="mt-8 inline-flex items-center gap-2 text-sm text-ink-2 transition-colors hover:text-brand-ink dark:hover:text-brand"
               >
                 查看当前版本的完整发行注记
-                <ArrowRightIcon size={17} weight="bold" />
               </a>
             </Reveal>
           </div>
@@ -329,7 +326,6 @@ function HomePage() {
                 </ButtonLink>
                 <ButtonLink to="/download" variant="secondary">
                   更多下载选项
-                  <ArrowRightIcon size={18} weight="bold" />
                 </ButtonLink>
               </div>
             </div>
@@ -400,7 +396,6 @@ function HomePage() {
             </a>
             <ButtonLink to="/develop" variant="secondary">
               开发者指南
-              <ArrowRightIcon size={18} weight="bold" />
             </ButtonLink>
           </div>
         </Reveal>
@@ -466,7 +461,6 @@ function HomePage() {
             <Reveal delay={0.24}>
               <ButtonLink to="/community" className="mt-8">
                 加入社区
-                <ArrowRightIcon size={18} weight="bold" />
               </ButtonLink>
             </Reveal>
           </div>

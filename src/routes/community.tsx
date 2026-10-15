@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 import {
-  ArrowSquareOutIcon,
   BookOpenTextIcon,
   CheckCircleIcon,
   CodeIcon,
@@ -66,7 +65,6 @@ function CommunityPage() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <ButtonLink href="https://www.libreoffice.org/improve-it/">
                 从这里开始
-                <ArrowSquareOutIcon size={18} weight="bold" />
               </ButtonLink>
               <ButtonLink to="/develop" variant="secondary">
                 先看开发者指南
@@ -140,11 +138,6 @@ function CommunityPage() {
                           {area.summary}
                         </span>
                       </span>
-                      <ArrowSquareOutIcon
-                        size={16}
-                        weight="bold"
-                        className="mt-3 shrink-0 text-ink-3 transition-transform group-hover:translate-x-0.5"
-                      />
                     </a>
                   </li>
                 </Reveal>
@@ -182,10 +175,9 @@ function CommunityPage() {
                 href={eventsLink.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="mt-6 inline-flex items-center gap-2 text-sm text-ink-2 transition-colors hover:text-brand-ink dark:hover:text-brand"
+                className="mt-6 text-sm text-ink-2 transition-colors hover:text-brand-ink dark:hover:text-brand link-underline"
               >
                 {eventsLink.label}
-                <ArrowSquareOutIcon size={16} weight="bold" />
               </a>
             </div>
           </Reveal>

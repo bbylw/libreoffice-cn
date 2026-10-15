@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 import {
-  ArrowSquareOutIcon,
   BookOpenTextIcon,
   BriefcaseIcon,
   CloudIcon,
@@ -132,13 +131,8 @@ function DownloadPage() {
                   rel="noreferrer noopener"
                   className="group flex flex-col gap-1.5 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
                 >
-                  <span className="flex items-center gap-2 text-lg font-medium tracking-tight text-ink">
+                  <span className="text-lg font-medium tracking-tight text-ink">
                     {entry.label}
-                    <ArrowSquareOutIcon
-                      size={17}
-                      weight="bold"
-                      className="text-ink-3 transition-transform group-hover:translate-x-0.5"
-                    />
                   </span>
                   <span className="max-w-[48ch] text-sm leading-relaxed text-ink-2 sm:text-right">
                     {entry.note}
@@ -165,7 +159,6 @@ function DownloadPage() {
                       {entry.note}
                     </span>
                   </span>
-                  <ArrowSquareOutIcon size={16} weight="bold" className="mt-1 shrink-0 text-ink-3" />
                 </a>
               </div>
             ))}
@@ -265,10 +258,9 @@ function DownloadPage() {
                   href={link.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex items-center gap-1.5 text-sm text-ink-2 transition-colors hover:text-brand-ink dark:hover:text-brand"
+                  className="text-sm text-ink-2 transition-colors hover:text-brand-ink dark:hover:text-brand"
                 >
                   {link.label}
-                  <ArrowSquareOutIcon size={15} weight="bold" />
                 </a>
               ))}
             </div>
