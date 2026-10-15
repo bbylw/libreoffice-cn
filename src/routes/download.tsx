@@ -17,6 +17,7 @@ import {
 import { Reveal } from '~/components/Reveal'
 import { SectionHeading } from '~/components/SectionHeading'
 import { ButtonLink } from '~/components/ButtonLink'
+import { PlatformMark } from '~/components/PlatformMark'
 import {
   downloadNotes,
   platformEntries,
@@ -127,24 +128,16 @@ function DownloadPage() {
                 rel="noreferrer noopener"
                 className="group flex h-full flex-col rounded-card border border-line bg-bg p-5 transition-colors hover:border-brand/45"
               >
-                <span className="font-mono text-[13px] font-medium tracking-tight text-ink">
-                  {entry.label}
+                <span className="flex items-start gap-3">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-control border border-line bg-surface text-ink-2 transition-colors group-hover:text-brand-ink dark:group-hover:text-brand">
+                    <PlatformMark platform={entry.platform} className="size-5" />
+                  </span>
+                  <span className="font-mono text-[13px] font-medium leading-snug tracking-tight text-ink">
+                    {entry.label}
+                  </span>
                 </span>
-                <span className="mt-2 flex-1 text-sm leading-relaxed text-ink-2">
+                <span className="mt-3 text-sm leading-relaxed text-ink-2">
                   {entry.note}
-                </span>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-brand-ink transition-colors dark:text-brand">
-                  前往下载
-                  <svg
-                    viewBox="0 0 16 16"
-                    className="size-3.5 transition-transform group-hover:translate-x-0.5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    aria-hidden="true"
-                  >
-                    <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
                 </span>
               </a>
             </Reveal>

@@ -5,11 +5,21 @@
  * 也容易让读者装到过时版本。所有入口都是与版本无关的官方页面，由官方页面给出最新稳定版。
  */
 
+/**
+ * 平台徽标种类：同一系统的不同架构共用一个徽标。
+ */
+export type PlatformId = 'windows' | 'macos' | 'linux'
+
 export interface DownloadEntry {
   id: string
   label: string
   note: string
   href: string
+}
+
+/** 平台条目比通用条目多一个必填的徽标种类。 */
+export interface PlatformEntry extends DownloadEntry {
+  platform: PlatformId
 }
 
 /**
@@ -22,42 +32,48 @@ export const primaryDownloadUrl = 'https://zh-tw.libreoffice.org/下載/'
  * 平台版本入口。点击统一跳官方下载页：官方页面会识别访问者系统并给出
  * 对应架构的安装包与语言包，站内不复制下载文件，也不写死版本号。
  */
-export const platformEntries: DownloadEntry[] = [
+export const platformEntries: PlatformEntry[] = [
   {
     id: 'win-x64',
     label: 'Windows (x86-64)',
     note: '主流 PC 与笔记本，64 位 Intel 或 AMD 处理器。',
     href: primaryDownloadUrl,
+    platform: 'windows',
   },
   {
     id: 'win-arm64',
     label: 'Windows (ARM64)',
     note: '骁龙等 ARM 架构的 Windows 设备。',
     href: primaryDownloadUrl,
+    platform: 'windows',
   },
   {
     id: 'mac-arm64',
     label: 'macOS (Apple Silicon)',
     note: 'M 系列芯片的 Mac。',
     href: primaryDownloadUrl,
+    platform: 'macos',
   },
   {
     id: 'mac-x64',
     label: 'macOS (Intel)',
     note: '较早的 Intel 芯片 Mac。',
     href: primaryDownloadUrl,
+    platform: 'macos',
   },
   {
     id: 'linux-x64',
     label: 'Linux (x86-64)',
     note: 'DEB、RPM 与 tar.gz 压缩包，按发行版选择。',
     href: primaryDownloadUrl,
+    platform: 'linux',
   },
   {
     id: 'linux-arm64',
     label: 'Linux (ARM64)',
     note: '树莓派等 ARM 开发板与 ARM 服务器。',
     href: primaryDownloadUrl,
+    platform: 'linux',
   },
 ]
 
