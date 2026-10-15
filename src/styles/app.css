@@ -1,0 +1,142 @@
+/* LibreOffice 中文站 | 设计令牌与基础样式
+ *
+ * 设计取向: 编辑式排版 + 技术感细节。单一强调色取自 LibreOffice 品牌绿 #18a303。
+ * 形状系统: 卡片 16px, 控件 10px, 仅版本徽标使用胶囊形。全站统一, 不混用。
+ */
+
+@import 'tailwindcss' source('../');
+@import '@fontsource-variable/outfit';
+@import '@fontsource-variable/noto-sans-sc';
+@import '@fontsource-variable/jetbrains-mono';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme inline {
+  --font-sans: 'Outfit Variable', 'Noto Sans SC Variable', ui-sans-serif, system-ui,
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-brand: var(--brand);
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-fg: var(--brand-fg);
+  --color-brand-soft: var(--brand-soft);
+
+  --radius-card: 16px;
+  --radius-control: 10px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  color-scheme: light;
+  --bg: #f2f4f4;
+  --surface: #ffffff;
+  --surface-2: #e8ebeb;
+  --line: #d7dcdd;
+  --ink: #0f1315;
+  --ink-2: #3c4548;
+  --ink-3: #5b6568;
+  /* 品牌绿: 图形与标志用原色, 文字与按钮用加深版本以满足 WCAG AA */
+  --brand: #18a303;
+  --brand-bg: #0e6a02;
+  --brand-fg: #ffffff;
+  --brand-soft: rgb(24 163 3 / 0.1);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0c0f10;
+  --surface: #14181a;
+  --surface-2: #1c2224;
+  --line: #2a3235;
+  --ink: #edf1f1;
+  --ink-2: #c4cdce;
+  --ink-3: #98a3a5;
+  --brand: #58c81f;
+  --brand-bg: #58c81f;
+  --brand-fg: #08120a;
+  --brand-soft: rgb(88 200 31 / 0.14);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--brand-soft);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* 中文正文保持可读行长 */
+  p {
+    line-height: 1.75;
+  }
+}
+
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1240px;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+@utility link-underline {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
